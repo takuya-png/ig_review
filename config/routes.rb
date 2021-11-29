@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'users#new'
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   resources :favorites, only: [:index, :create, :destroy]
   resources :users, only: [:new, :create, :show, :edit]
   resources :sessions, only: [:new, :create, :destroy]
