@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :login_required, only: [:new, :create]
+  skip_before_action :login_required, only: [:new, :create, :update, :show, :edit]
   
   def new
     @user = User.new
@@ -15,7 +15,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to user_path(@user.id), notice: "投稿できました！"
     else
@@ -24,12 +23,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     redirect_to pictures_path, notice: "不正操作を記録しました。" unless current_user.id == @users.id
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   private
