@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save 
+      # session[:user_id] = @user.id
       redirect_to user_path(@user.id), notice: "ユーザが作成されました！"
     else
       render :new
@@ -24,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @users = User.find(params[:id])
     redirect_to pictures_path, notice: "不正操作を記録しました。" unless current_user.id == @users.id
   end
 
